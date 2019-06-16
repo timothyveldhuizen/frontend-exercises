@@ -1,0 +1,14 @@
+{
+  "name": "npm-scripts",
+  "version": "1.0.0",
+  "description": "NPM script exercises",
+  "main": "index.js",
+  "scripts": {
+    "say-hello": "echo 'Just say Hello! Hello..'",
+    "bash-hello": "bash hello.sh",
+    "presay-hello": "echo 'I run before say-hello'",
+    "postsay-hello": "echo 'I run after say-hello'" 
+  },
+  "author": "",
+  "license": "ISC"
+}

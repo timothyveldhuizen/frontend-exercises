@@ -1,0 +1,84 @@
+.box {
+    margin: 5px;
+    width: 300px;
+    border: 1px dashed;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.box div {
+    width: 120px;
+    border: 1px dashed;
+    background-color: cadetblue;
+    margin: 5px;
+}
+.box2 {
+    margin: 5px;
+    width: 300px;
+    border: 1px dashed;
+    display: flex;
+    /* flex-direction: row;
+    flex-wrap: nowrap; */
+    flex-flow: row nowrap;
+}
+
+.box2 div {
+    width: 120px;
+    border: 1px dashed;
+    background-color: crimson;
+    margin: 5px;
+}
+
+.box3 {
+    margin: 5px;
+    width: 500px;
+    border: 1px dashed;
+    display: flex;
+}
+.one {
+    flex: 1 1 auto;
+    border: 1px dashed;
+    background-color: goldenrod;
+    margin: 5px;
+}
+
+.two {
+    flex: 2 1 auto;
+    border: 1px dashed;
+    background-color: goldenrod;
+    margin: 5px;
+}
+
+.three {
+    flex: 1 1 auto;
+    border: 1px dashed;
+    background-color: goldenrod;
+    margin: 5px;
+}
+.box4 {
+    margin: 5px;
+    width: 300px;
+    border: 1px dashed;
+    display: flex;
+    align-items: center;
+}
+.box4 div {
+    width: 120px;
+    border: 1px dashed;
+    background-color: grey;
+    margin: 5px;
+}
+.box5 {
+    margin: 5px;
+    width: 600px;
+    border: 1px dashed;
+    display: flex;
+    justify-content: space-evenly;
+}
+.box5 div {
+    width: 120px;
+    border: 1px dashed;
+    background-color: blue;
+    margin: 5px;
+}

@@ -1,0 +1,12 @@
+{
+  "name": "yarn-scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "say-hello": "echo 'Just say Hello! Hello..'"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.4.5"
+  }
+}
