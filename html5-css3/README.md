@@ -25,7 +25,7 @@ More information about the differences:
 - https://medium.com/youstart-labs/beginners-guide-to-choose-between-css-grid-and-flexbox-783005dd2412 
 
 ### Flexbox layout
-You can use the `display: flex;` to create a *flex container*.
+You can use the `display: flex;` to create a *flex container* with defaults.
 And within the *flex container* you can use `flex-direction: column;` to align the direction vertical for the items in the *flex container*.
 
 You can also use `flex-wrap: wrap;` (initial value is nowrap). Wrap will fit the items in the container.
@@ -63,5 +63,17 @@ A grid is an intersecting set of horizontal and vertical lines – one set defin
 - Control of overlapping content
 
 You can create a *grid container* by declaring `display: grid` or `display: inline-grid` on an element.
+As soon as we do this, all direct children of that element become *grid items*
+
+Now we can assign *grid tracks* by using `grid-template-columns` or `grid-template-rows`.
+E.g. if we assign `grid-template-columns: 200px 200px 200px;` then we create 3 200-pixel-wide column tracks.
+The *grid items* will be laid out on this grid, one grid item in each grid cell.
+
+You can also use *fraction units* to define the width of the tracks using `grid-template-columns: 1fr 2fr 1fr;`
+The available space is split into four that will grow and shrink according to the available space in the grid container.
+
+It is also possible to use the `repeat(3, 1fr)` to define you want three tracks of 1fr.
+
+Grid has a solution for this with the `minmax()` function. In this next example I am using minmax() in the value of grid-auto-rows. This means automatically created rows will be a minimum of 100 pixels tall, and a maximum of auto. Using auto means that the size will look at the content size and will stretch to give space for the tallest item in a cell, in this row.
 
 More information: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout

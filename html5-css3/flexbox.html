@@ -3,24 +3,35 @@
         <link rel="stylesheet" href="flexbox.css"> 
     </head>
     <body>
+        <p>This box has only display: flex, which uses defaults</p>
         <div class="box">
+            <div>One</div>
+            <div>Two</div>
+            <div>Three</div>
+        </div>  
+        
+        <p>This box has flex-direction: row and flex-wrap: nowrap</p>
+        <div class="box1">
                 <div>One</div>
                 <div>Two</div>
                 <div>Three</div>
         </div>  
 
+        <p>This box is exactly same as above but uses flex-flow: row nowrap, which is essentialy the same</p>
         <div class="box2">
                 <div>One</div>
                 <div>Two</div>
                 <div>Three</div>
         </div>  
 
+        <p>This box has flex items with properties flex-grow, flex-shrink and flex-basis to determine width and grow shrink space</p>
         <div class="box3">
                 <div class="one">One</div>
                 <div class="two">Two</div>
                 <div class="three">Three</div>
         </div>
 
+        <p>This box centers the items along the cross axis (in this case column axis)</p>
         <div class="box4">
             <div>One</div>
             <div>Two</div>
@@ -31,6 +42,7 @@
             </div>
         </div>
 
+        <p>This box aligns the items along the main axis with justify-content (in this case row axis) </p>
         <div class="box5">
             <div>One</div>
             <div>Two</div>
