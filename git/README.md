@@ -67,6 +67,8 @@ So you can see now that your remote shortname is `origin` and the branch `master
 But for now you can do `git push` to push your commits from your local repo to the remote one.
 This because you only have one remote and one branch.
 
+You can also do `git remote -v` to list your existing remotes.
+
 More info: https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
 
 ## Git fetch and pull
