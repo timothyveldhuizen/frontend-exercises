@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-// plain functions
+// plain function
 console.log('---PLAIN FUNCTION---');
 function foo() {
   console.log('Hello');
@@ -32,7 +32,7 @@ console.log('before');
 console.log(foo());
 console.log('after');
 
-// the subscription of foo was entirely synchronous, just like a function
+// the subscription of foo is entirely synchronous, just like a function
 console.log('---OBSERVABLES---');
 console.log('before');
 foo$.subscribe(x => {
@@ -62,6 +62,7 @@ const foos$ = new Observable(subscriber => {
 });
 
 console.log('before');
+// this below subscribe happens synchronous
 foos$.subscribe(x => {
   console.log(x);
 });
@@ -75,7 +76,7 @@ const bar$ = new Observable(subscriber => {
   subscriber.next(100);
   subscriber.next(200);
   setTimeout(() => {
-    subscriber.next(300); // happens asynchronously
+    subscriber.next(300); // this happens asynchronously
   }, 1000);
 });
  
@@ -84,3 +85,4 @@ bar$.subscribe(x => {
   console.log(x);
 });
 console.log('after');
+// the 300 is logged after console.log('after') because of the timeout
