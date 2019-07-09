@@ -100,7 +100,7 @@ console.log(getPriceMultipleArrow2(1,2,3));
 
 
 // Returning this in arrow funtions
-// ES5 example: in the function, context of this is set to object invoice
+// ES5 example: in the function, context of 'this' is set to object invoice
 var invoice = {
     number: 23,
     process: function() {
@@ -109,7 +109,7 @@ var invoice = {
 };
 invoice.process();
 
-//ES6 example: in the arrow function, context of this is set to Global Window object
+//ES6 example: in the arrow function, context of 'this' is set to Global Window object
 var invoice2 = {
     number: 23,
     process: () => console.log(this)
@@ -118,7 +118,7 @@ invoice2.process();
 
 
 //IIFE Immediately invoked function expression
-// IIFE using any unary operater ! + - etc.
+// IIFE using any unary operater ! + - etc. and () at the end
 !function() {
     console.log("Hello from IIFE!");
 }();
@@ -193,6 +193,8 @@ showMessage(`Invoice num: ${invoiceNum}`);
 
 
 // no commas needed in classes, but are needed in object literals { some: '', }
+// the object literal notation (initializer notation)
+// An object initializer is a comma-delimited list of zero or more pairs of property names and associated values of an object
 class Task {
     constructor() {
         console.log('constructing Task');

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, from, interval } from 'rxjs';
 
 // plain function
 console.log('---PLAIN FUNCTION---');
@@ -86,3 +86,46 @@ bar$.subscribe(x => {
 });
 console.log('after');
 // the 300 is logged after console.log('after') because of the timeout
+
+//  Creating
+// The following example creates an Observable to emit the string 'hi' every second to a subscriber
+// Observables can be created with new Observable. Most commonly, observables are created using creation functions, like of, from, interval, etc.
+const observable = new Observable(function subscribe(subscriber) {
+  const id = setInterval(() => {
+    subscriber.next('hi')
+  }, 1000);
+});
+
+// Subscribing
+// the Observable observable in the example can be subscribed to, like this:
+// It is not a coincidence that observable.subscribe and subscribe in new Observable(function subscribe(subscriber) {...}) have the same name
+// This shows how subscribe calls are not shared among multiple Observers of the same Observable
+// Subscribing to an Observable is like calling a function, providing callbacks where the data will be delivered to.
+const subscription1 = observable.subscribe(x => console.log(x));
+
+
+// Executing
+// The code inside new Observable(function subscribe(subscriber) {...}) represents an "Observable execution", a lazy computation that only happens for each Observer that subscribes
+// In an Observable Execution, zero to infinite Next notifications may be delivered. If either an Error or Complete notification is delivered, then nothing else can be delivered afterwards.
+const observableComplete = new Observable(function subscribe(subscriber) {
+  subscriber.next(1);
+  subscriber.next(2);
+  subscriber.next(3);
+  subscriber.complete();
+  subscriber.next(4); // Is not delivered because it would violate the contract
+});
+
+// Disposing "Observable execution"
+// When observable.subscribe is called, the Observer gets attached to the newly created Observable execution. This call also returns an object, the Subscription:
+const observableFrom = from([10, 20, 30]);
+const subscription = observableFrom.subscribe(x => console.log(x));
+
+
+// A typical example of a creation operator would be the interval function. It takes a number (not an Observable) as input argument, and produces an Observable as output:
+const observableInterval = interval(1000 /* number of milliseconds */);
+
+
+
+// Later:
+subscription1.unsubscribe();
+subscription.unsubscribe();

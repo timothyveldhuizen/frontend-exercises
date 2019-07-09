@@ -6,6 +6,21 @@ RxJS is a library for composing asynchronous and event-based programs by using o
 
 Off course do `npm init` then `npm install --save-dev typescript` for Typescript and `npm install rxjs` on a blank project.
 Then `npx tsc --init` to make it a Typescript project and `npx tsc` to compile it to Javascript files.
+When the output is rendered you can debug/run the js files in VS Code with launch.json pointing to outFiles of JS file.
+```
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceFolder}\\rxjs-observables\\basics.ts",
+            "outFiles": [
+                "${workspaceFolder}/rxjs-observables/dist/*.js"
+            ],
+            "useWSL": true
+        }
+    ]
+```
 
 ## Concept of RxJS
 The essential concepts in RxJS which solve async event management are:
@@ -61,3 +76,19 @@ Plus, "calling" or "subscribing" is an isolated operation: two function calls tr
 > Subscribing to an Observable is analogous to calling a Function.
 
 > Observables are able to deliver values either synchronously or asynchronously.
+
+## Anatomy of observables
+Core Observable concerns:
+- Creating Observables
+- Subscribing to Observables
+- Executing the Observable
+- Disposing Observables
+
+Operators
+- Pipeable operators
+- Creation operators
+
+A *Pipeable Operator* is a function that takes an Observable as its input and returns another Observable. It is a pure operation: the previous Observable stays unmodified.
+An Pipeable Operator is essentially a pure function which takes one Observable as input and generates another Observable as output. Subscribing to the output Observable will also subscribe to the input Observable.
+
+*Creation Operators* are the other kind of operator, which can be called as standalone functions to create a new Observable. For example: `of(1, 2, 3)` creates an observable that will emit 1, 2, and 3, one right after another
