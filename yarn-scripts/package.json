@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "say-hello": "echo 'Just say Hello! Hello..'"
+    "say-hello": "echo 'Just say Hello! Hello..'",
+    "presay-hello": "echo 'I run before say-hello'",
+    "postsay-hello": "echo 'I run after say-hello'"
   },
   "license": "MIT",
   "devDependencies": {
