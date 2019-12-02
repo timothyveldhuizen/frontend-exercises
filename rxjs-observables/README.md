@@ -13,11 +13,10 @@ When the output is rendered you can debug/run the js files in VS Code with launc
             "type": "node",
             "request": "launch",
             "name": "Launch Program",
-            "program": "${workspaceFolder}\\rxjs-observables\\basics.ts",
+            "program": "${workspaceFolder}/rxjs-observables/basics.ts",
             "outFiles": [
                 "${workspaceFolder}/rxjs-observables/dist/*.js"
             ],
-            "useWSL": true
         }
     ]
 ```
