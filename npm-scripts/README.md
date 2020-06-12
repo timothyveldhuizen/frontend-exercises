@@ -47,6 +47,11 @@ Use the exact naming as the normal normal script as shown below:
 }
 ```
 
+## NPM install and NPM update
+
+You can do `"npm install"` which will install all the devdependencies + dependencies mentioned in package.json.
+If you want to check on new versions you can do `"npm outdated"`, which will list all outdated dependencies or you can do `"npm update"` which will update dependencies based on the versioning syntax. For example `"typescript": "^3.9.2"` version rule means we can update to patch 3.9.3, 3.9.4 or minor 3.10.0 releases. And `"npm update"` will do that for you following the versioning rule.
+
 ## More information
 
 Finally, there is a lot that you can do with NPM scripts. Some use cases are:
