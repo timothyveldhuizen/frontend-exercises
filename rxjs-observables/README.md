@@ -6,20 +6,10 @@ RxJS is a library for composing asynchronous and event-based programs by using o
 
 Off course do `npm init` then `npm install --save-dev typescript` for Typescript and `npm install rxjs` on a blank project.
 Then `npx tsc --init` to make it a Typescript project and `npx tsc` to compile it to Javascript files.
-When the output is rendered you can debug/run the js files in VS Code with launch.json pointing to outFiles of JS file.
-```
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceFolder}/rxjs-observables/basics.ts",
-            "outFiles": [
-                "${workspaceFolder}/rxjs-observables/dist/*.js"
-            ],
-        }
-    ]
-```
+
+In the package.json a script `"basics"` is added to compile it to Javascript file using the tsconfig.json settings.
+And then afterwards run the compiled Javascript file with node.
+Simply do `"npm run basics"`.
 
 ## Concept of RxJS
 The essential concepts in RxJS which solve async event management are:
