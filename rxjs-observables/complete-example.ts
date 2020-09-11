@@ -1,4 +1,4 @@
-import { Observable, Subscription } from "rxjs";
+import { Observable, Subscription, Subject } from "rxjs";
 import { finalize } from "rxjs/operators";
 
 /*
@@ -99,6 +99,7 @@ const subcription3: Subscription = source3$
 * Example 4: Even with a subject when it completes
 * then all the subcriptions subscribed to the subject are unsubscribed
 */
+console.log('==== Example 4 ====')
 const subjectSource$: Subject<number> = new Subject<number>();
 
 // The subcriptions with operator finalize to really check if it is
@@ -123,5 +124,5 @@ subjectSource$.next(3);
 setTimeout(() => {
     subjectSource$.next(5);
     subjectSource$.complete();
-}, 2000);
-setTimeout(() => subjectSource$.next(4), 1000);
+}, 6000);
+setTimeout(() => subjectSource$.next(4), 4000);
