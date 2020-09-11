@@ -4,8 +4,7 @@
   "description": "Exercises for RxJS with Observables",
   "main": "index.js",
   "scripts": {
-    "basics": "npx tsc",
-    "postbasics": "node dist/*.js",
+    "compile-to-js": "npx tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
