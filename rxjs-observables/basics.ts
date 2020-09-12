@@ -1,7 +1,10 @@
 import { Observable, from, interval } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-// plain function
+/*
+* Example 1: A plain function can be written similar with Observable
+*/
+console.log('==== Example 1 ====')
 console.log('---PLAIN FUNCTION---');
 function foo() {
   console.log('Hello');
@@ -13,8 +16,8 @@ console.log(x);
 const y = foo(); // same as foo()
 console.log(y);
 
-// You can write the same behavior above, but with Observables:
-console.log('---OBSERVABLES---');
+// You can write the same plain function above, but with Observable:
+console.log('---OBSERVABLE---');
 const foo$ = new Observable(subscriber => {
   console.log('Hello');
   subscriber.next(42);
@@ -23,19 +26,29 @@ const foo$ = new Observable(subscriber => {
 foo$.subscribe(x => console.log(x));
 foo$.subscribe(y => console.log(y));
 
-// Some people claim that Observables are asynchronous. That is not true
+/*
+* Example 2: Plain function and Observable are synchronous, it is not true that Observable is asynchronous
+* The subcsription is synchronous just like a plain function. 
+* Depending on the emitted data with .next() it will make the subscription sync or async.
+*/
+console.log('==== Example 2 ====')
 console.log('---PLAIN FUNCTION---');
 console.log('before');
 console.log(foo());
 console.log('after');
 
-// the subscription of foo is entirely synchronous, just like a function
+// The subscription of foo is entirely synchronous, just like a function
+// And data emits with .next() is synchronous in this example, so output is same as plain function
 console.log('---OBSERVABLES---(observable async is not true, subscription is sync like function)');
 console.log('before');
 foo$.subscribe(x => console.log(x));
 console.log('after');
 
-// Observables can "return" multiple values over time, something which functions cannot. You can't do this:
+/*
+* Example 3: Compared to a plain function, Observable can return multiple values, which a plain function can not.
+* The .next() (which returns values) can be called on multiple times
+*/
+console.log('==== Example 3 ====')
 console.log('---PLAIN FUNCTION--- (return multiple values not possible)');
 function foos() {
   console.log('Hello');
@@ -47,7 +60,6 @@ console.log(foos());
 console.log('after');
 
 // Functions can only return one value. Observables, however, can do this:
-// With synchronous output:
 console.log('---OBSERVABLES (synchronous)---');
 const foos$ = new Observable(subscriber => {
   console.log('Hello');
@@ -57,31 +69,42 @@ const foos$ = new Observable(subscriber => {
 });
 
 console.log('before');
-// this below subscribe happens synchronous
 foos$.subscribe(x => console.log(x));
 console.log('after');
 
-// But you can also "return" values asynchronously:
+/*
+* Example 4: Observable can be asynchronous depending over time when the data is emitted
+* Even after the subscription you can execute other code, but when a new data event is emitted from the observable
+* Then the onNext function in the subscribe will be executed.
+*/
+console.log('==== Example 4 ====')
 console.log('---OBSERVABLES (asynchronous)---');
 const bar$ = new Observable(subscriber => {
   console.log('Hello');
   subscriber.next(42);
   subscriber.next(100);
+  setTimeout(() => subscriber.next('300 from example 4'), 1000); // this happens asynchronously
   subscriber.next(200);
-  setTimeout(() => subscriber.next(300), 1000); // this happens asynchronously
 });
  
 console.log('before');
 bar$.subscribe(x => console.log(x));
-console.log('after (300 is logged after console.log(after)');
-// the 300 is logged after console.log('after') because of the timeout
+console.log('after (300 is logged further below');
+// the 300 is logged after console.log('after') because of the timeout to mimic asynchronously data events
 
+console.log('==== Creation examples ====')
 //  Creating
 // The following example creates an Observable to emit the string 'hi' every second to a subscriber
 // Observables can be created with new Observable. Most commonly, observables are created using creation functions, like of, from, interval, etc.
 const observable = new Observable(function subscribe(subscriber) {
   const id = setInterval(() => {
     subscriber.next('hi interval 1')
+  }, 1000);
+});
+
+const observable1 = Observable.create((observer: any) => {
+  const id = setInterval(() => {
+    observer.next('hi interval 1')
   }, 1000);
 });
 
@@ -120,7 +143,7 @@ const observableFrom = from([4, 8, 16]);
 const subscription = observableFrom.subscribe({
   next: value => console.log(value),
   error: error => console.log(error),
-  complete: () => console.log('Completed!'),
+  complete: () => console.log('Completed from 4, 8, 16!'),
 });
 
 
@@ -128,5 +151,5 @@ const subscription = observableFrom.subscribe({
 setTimeout(() => {
   subscription1.unsubscribe();
   subscription2.unsubscribe();
-  console.log("Unsubscribed all")
+  console.log("Unsubscribed from subscriptions to observable and observable1")
 }, 5000);
