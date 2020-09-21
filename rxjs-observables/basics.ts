@@ -102,7 +102,7 @@ const observable = new Observable(function subscribe(subscriber) {
   }, 1000);
 });
 
-const observable1 = Observable.create((observer: any) => {
+const observable1 = new Observable((observer: any) => {
   const id = setInterval(() => {
     observer.next('hi interval 1')
   }, 1000);

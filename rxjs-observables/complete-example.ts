@@ -8,7 +8,7 @@ import { finalize } from "rxjs/operators";
  * they are even emitted due to the setTimeout
  */
 console.log('==== Example 1 ====');
-const source1$: Observable<any> = Observable.create((obs: any) => {
+const source1$: Observable<any> = new Observable((obs: any) => {
     obs.next(1);
     obs.next(2);
     obs.next(3);
@@ -24,7 +24,7 @@ const subcription1: Subscription = source1$.subscribe(
         console.log(err);
     },
     () => {
-        console.log("Completed 1");
+        console.log("Completed example 1");
     }
 );
 subcription1.unsubscribe();
@@ -37,7 +37,7 @@ console.log("Unsubscribed 1 = ", subcription1.closed);
 * they are even emitted due to the setTimeout
 */
 console.log('==== Example 2 ====');
-const source2$: Observable<any> = Observable.create((obs: any) => {
+const source2$: Observable<any> = new Observable((obs: any) => {
     obs.next(1);
     obs.next(2);
     obs.next(3);
@@ -54,7 +54,7 @@ const subcription2: Subscription = source2$.subscribe(
         console.log(err);
     },
     () => {
-        console.log("Completed 2");
+        console.log("Completed example 2");
     }
 );
 console.log("Unsubscribed 2 = ", subcription2.closed);
@@ -68,7 +68,7 @@ console.log("Unsubscribed 2 = ", subcription2.closed);
 * Also we us the operator finalize to really check if it is unsubscribed when observable completes or errors
 */
 console.log('==== Example 3 ====');
-const source3$: Observable<any> = Observable.create((obs: any) => {
+const source3$: Observable<any> = new Observable((obs: any) => {
     obs.next(1);
     obs.next(2);
     obs.next(3);
@@ -91,7 +91,7 @@ const subcription3: Subscription = source3$
             console.log(err);
         },
         () => {
-            console.log("Completed 3");
+            console.log("Completed  example 3");
         }
     );
 
@@ -108,12 +108,32 @@ const subscription1: Subscription = subjectSource$
     .pipe(
         finalize(() => console.log("Unsubscribed 1 = ", subscription1.closed)),
     )
-    .subscribe(x => console.log('source subject 1', x));
+    .subscribe(
+        x => {
+            console.log("source subject 1 = ", x);
+        },
+        err => {
+            console.log(err);
+        },
+        () => {
+            console.log("Completed example 4 - source 1");
+        }
+    );
 const subscription2: Subscription = subjectSource$
     .pipe(
         finalize(() => console.log("Unsubscribed 2 = ", subscription2.closed)),
     )
-    .subscribe(x => console.log('source subject 2', x));
+    .subscribe(
+        x => {
+            console.log("source subject 2 = ", x);
+        },
+        err => {
+            console.log(err);
+        },
+        () => {
+            console.log("Completed example 4 - source 2");
+        }
+    );
 
 
 // The data events of the subject, so when emitted the subcriptions above do
