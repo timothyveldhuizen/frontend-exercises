@@ -27,6 +27,7 @@ const object = {
   title: 'This is the object title'
 }
 
+
 addLogMsg(object, (object) => `Custom log function: ${object.title}`)
 doLog('INFO: ', object)
 // Output = INFO: Custom log function: This is the object title
