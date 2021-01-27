@@ -72,3 +72,24 @@ function withoutTypeParam(fn: (value: any) => any): void {}
 
 // With type parameter
 function withTypeParam<T>(fn: (value: T) => T): void {}
+
+/*
+* Pass an array of functions as parameter
+*/
+
+type NumberFn = (n: number) => number;
+
+function pipeFunctions(n: number, fns: NumberFn[]): number {
+  return fns.reduce((acc, curr) => curr(acc), n);
+}
+
+function add(n: NumberFn): NumberFn {
+  return n;
+}
+
+const result = pipeFunctions(1, [
+  add(n => n * 2), 
+  n => n * 3, 
+  n => n * 4
+  ]
+);
