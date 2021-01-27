@@ -9,7 +9,7 @@
 * Simple inline arrow function type expressions
 */
 const mySimpleFn: (value: string) => string = (value: string) => value;
-const mySimpleNormalFn: (value: string) => string = function(value: string) {
+const mySimpleNormalFn: (value: string) => string = function (value: string) {
   return value;
 }
 
@@ -25,7 +25,7 @@ type MyFnType = (value: string) => string;
 const myConstFunction: MyFnType = (value: string) => value;
 
 // Or with a normal function declaration
-const myNormalFn: MyFnType = function(value: string) {
+const myNormalFn: MyFnType = function (value: string) {
   return value
 }
 
@@ -35,7 +35,7 @@ const myNormalFn: MyFnType = function(value: string) {
 */
 interface MyFnInterface {
   // this is the call signature existing of parameters and return type
-  (value: string): string; 
+  (value: string): string;
 }
 
 const myNextFunction: MyFnInterface = (value: string) => value;
@@ -47,19 +47,19 @@ const myNextFunction: MyFnInterface = (value: string) => value;
 */
 
 // Parameter as function type expression
-function expression(fn: (value: string) => string): void {}
+function expression(fn: (value: string) => string): void { }
 
 // Parameter as function alias type
 type fnAlias = (value: string) => string;
 
-function aliasType(fn: fnAlias): void {}
+function aliasType(fn: fnAlias): void { }
 
 // Parameter as function interface
 interface fnInterface {
   (value: string): string;
 }
 
-function interfaceType(fn: fnInterface): void {}
+function interfaceType(fn: fnInterface): void { }
 
 
 /*
@@ -68,15 +68,16 @@ function interfaceType(fn: fnInterface): void {}
 */
 
 // Without type parameter
-function withoutTypeParam(fn: (value: any) => any): void {}
+function withoutTypeParam(fn: (value: any) => any): void { }
 
 // With type parameter
-function withTypeParam<T>(fn: (value: T) => T): void {}
+function withTypeParam<T>(fn: (value: T) => T): void { }
 
 /*
 * Pass an array of functions as parameter
 */
 
+// Functions
 type NumberFn = (n: number) => number;
 
 function pipeFunctions(n: number, fns: NumberFn[]): number {
@@ -88,8 +89,29 @@ function add(n: NumberFn): NumberFn {
 }
 
 const result = pipeFunctions(1, [
-  add(n => n * 2), 
-  n => n * 3, 
+  add(n => n * 2),
+  n => n * 3,
   n => n * 4
-  ]
+]
 );
+
+// In a class
+class PipeObject {
+  n: number;
+
+  constructor(n: number) {
+    this.n = n;
+  }
+
+  pipe(...fns: ((source: any) => any)[]) {
+    return fns.reduce((acc: any, curr: (source: any) => any) => {
+      return curr(acc);
+    }, this.n);
+  }
+}
+
+const resultObject = new PipeObject(1).pipe(
+  add(n => n * 2),
+  n => n * 3,
+  n => n * 4,
+)
